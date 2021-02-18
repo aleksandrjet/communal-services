@@ -8,6 +8,7 @@ import FieldEndPeriod from './components/FieldEndPeriod'
 import Spy from './components/Spy'
 import Histagram from '../components/histgram/Histagram'
 import { filterData } from './utils/filterData/filterData'
+import { getErrorPeriod } from './utils/getErrorPeriod'
 import { fieldNames, IFormValues, initialValues } from './utils/mainFormConfig'
 import s from './Main.module.sass'
 
@@ -18,6 +19,7 @@ const Main = () => {
     return filterData(formState)
   }, [formState])
 
+  const errorPeriod = getErrorPeriod(formState)
 
   return (
     <>
@@ -37,6 +39,7 @@ const Main = () => {
                 />
                 <Field name={fieldNames.endPeriod} component={FieldEndPeriod} />
               </div>
+              {errorPeriod && <p className={s.error}>{errorPeriod}</p>}
             </form>
           )
         }}
